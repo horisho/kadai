@@ -48,7 +48,9 @@ end
 class Agent
   attr_accessor :max_stone, :name
   def initialize(max_stone,cpu_num)
-    arr_cpu_name = ["PLAYER","コンピュータA", "コンピュータB", "コンピュータC", "コ>ンピュータD", "コンピュータE"] 
+    arr_cpu_name = ("A".."Z").map {|name| "コンピュータ#{name}"}
+    arr_cpu_name.reverse! << "Player"
+    arr_cpu_name.reverse!
     @max_stone = max_stone; @name = arr_cpu_name[cpu_num]
   end
   def put_stone(stone_num)
