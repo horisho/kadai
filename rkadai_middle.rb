@@ -5,15 +5,15 @@ class Game
     @num_of_cpu = num_of_cpu
     @max_stone = rand(2..6)
     interval_1 = 0.2
-    print "机の上に ", @stone , "個 の石が積まれています\n"
+    puts "机の上に #{@stone}個 の石が積まれています"
     sleep(interval_1)
-    print "各プレイヤーは一度に 1個 以上 ", @max_stone, "個 以下の石を取り除きます\n"
+    puts "各プレイヤーは一度に 1個 以上 #{@max_stone}個 以下の石を取り除きます"
     sleep(interval_1)
-    print "プレイヤー数はあなたを入れて ", @num_of_cpu + 1, "人 です\n"
+    puts "プレイヤー数はあなたを入れて #{@num_of_cpu + 1}人 です"
     sleep(interval_1)
-    print "最後の石を取ったプレイヤーの負けとなります\n"
+    puts "最後の石を取ったプレイヤーの負けとなります"
     sleep(interval_1)
-    print "ゲームスタート！　\n"
+    puts "ゲームスタート！　"
     @cputurn = rand(0..@num_of_cpu)
   end
   def put_stone(stone_num)
@@ -30,16 +30,16 @@ class Game
     sleep(interval_2)
     if @stone >= stone_num && @max_stone >= stone_num && stone_num > 0
       @stone = @stone - stone_num
-      print "石が " , stone_num , "個 取り除かれました\n"
+      puts "石が #{stone_num}個 取り除かれました"
       sleep(interval_2)
       if @stone <= 0
-        print "積まれていた石がすべてなくなりました！　\n"
+        puts "積まれていた石がすべてなくなりました！　"
       else
-        print "石は " , @stone , "個 積まれています\n"
+        puts "石は #{@stone}個 積まれています"
         @cputurn = (@cputurn + 1) % (@num_of_cpu + 1)
       end
     else 
-      print "無効な入力です\n"
+      puts "無効な入力です"
       sleep(interval_2)
     end
   end
@@ -72,22 +72,22 @@ while game.stone > 0 do
   sleep(interval_0)
   if game.cputurn == 0
     while game.cputurn == 0 do
-      print "あなたの番です\n"
+      puts "あなたの番です"
       sleep(interval_0)
-      print "取り除く石の数を1以上", [game.max_stone, game.stone].min,"以下の数字で入力してください\n"
+      puts "取り除く石の数を1以上#{[game.max_stone, game.stone].min}以下の数字で入力してください"
       lst = gets
       game.leave_stone(lst.to_i)
       break if game.stone == 0
     end
   else
-    print agent[game.cputurn].name, "の番です\n"
+    puts "#{agent[game.cputurn].name}の番です"
     game.leave_stone(agent[game.cputurn].put_stone(game.stone))
   end
 end
 sleep(interval_0)
-print "ゲームオーバー！　\n"
+puts "ゲームオーバー！　"
 sleep(interval_0)
 if game.cputurn == 0
-  print "あなたの負けです！　\n"
-else print agent[game.cputurn].name, "の負けです！　\n"
+  print "あなたの負けです！　"
+else puts "#{agent[game.cputurn].name}の負けです！　"
 end
